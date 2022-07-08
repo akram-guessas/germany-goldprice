@@ -1,0 +1,16 @@
+{% extends 'goldprice/base.html' %}
+{% load bootstrap5%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="border p-4 mb-5 text-right" style="margin: auto;width: 100%;padding: 10px;">
+    <legend class="border-bottom pb-1 mb-3">تعديل بيانات المنتج</legend>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="text-center">
+            <input class="btn btn-info" type="submit" value="تعديل">
+        </div>
+    </form>
+</div>
+{% endblock content %}

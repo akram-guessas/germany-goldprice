@@ -1,0 +1,88 @@
+{% extends 'goldprice/base.html'%}
+{% load static %}
+{% load post_tag %}
+{% block content %}
+    <!-- Page Content -->
+    <!-- Single Starts Here -->
+    <div class="single-product text-right">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                  <div class="line-dec"></div>
+                  <div class="row">
+                    <div class="col-md-4"><h1 class="mr-5">صفحة التفاصيل</h1></div>
+                    <div class="col-md">
+                      <div class="form-group">
+                        {% if item.author == user %}
+                            <a class="btn btn-info " href="{% url 'user:item-update' item.id %}">تعديل</a>
+                            <a class="btn btn-danger " href="{% url 'user:item-delete' item.id %}">حذف</a>
+                        
+                        {% endif %}
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            <div class="col-md-6">
+                <div class="right-content">
+                  <h4>{{item.item_name}}</h4>
+                  <div class="d-index-flex mb-2"></div>
+                    
+                  <h6>السعر: {{item.price}}$</h6>
+                  <p>{{item.description|safe}}</p>
+                  <span class="hidden-phone mb-1 text-secondary">رقم الهاتف: {{item.phone_numb}}</span>
+                  <br>
+                  <span class="hidden-phone mb-1 text-secondary">العنوان: {{item.address}}</span>
+                  <div class="down-content">
+                    <div class="categories">
+                      <h6>الفئة: <span> الذهب، أكسسوارات الذهب</span></h6>
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="padding: 20px;border: 1px solid #eee!important;border-radius: 5px">
+                    <img src="{{item.item_image.url}}" alt="" style="max-width: 100%;">
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Single Page Ends Here -->
+    <!-- Similar Starts Here -->
+      <div>
+        <div class="section-heading text-right">
+          <div class="line-dec"></div>
+          <h1 class="mr-5">ربما يعجبك أيضا</h1>
+        </div>
+        <div class="featured container no-gutter">
+          <div class="row items">
+              {% for item in items %}
+              <div class="item new col-md-3">
+              <a href="{% url 'user:detail' item.item_name item.id %}">
+                  <div class="featured-item">
+                      {% if item.item_image %}
+                              <img src="{{item.item_image.url}}" alt="">
+                          {% else %}
+                              <img class="card-img-top" src="{% static 'blog/img/defult.jpg' %}" alt="">
+                      {% endif %}
+                  <!--<img src="{% static 'user/images/product-01.jpg'%}" alt="">-->
+                  <h4>{{item.item_name|safe}} </h4>
+                  <h6 class="mb-1"><span>£</span> {{item.price}} </h6>
+                  <p class="mb-0"><i class="fa fa-phone" aria-hidden="true"></i> الهاتف: {{item.phone_numb}}</p>
+                  <p><i class="fa fa-map-marker" aria-hidden="true"></i> العنوان: {{item.address}}</p>
+                  
+                  </div>
+              </a>
+              </div>
+              {% endfor %}
+              {% include 'blog/pagination.html' with page=items %}
+          </div>
+        </div>
+      </div>
+      <!-- Similar Ends Here -->
+  
+{% endblock %}

@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir='rtl'>
+
+    <head>
+        <meta charset="utf-8">
+        <!--<title>iDESIGN - Interior Design HTML Template</title>-->
+        {% if title %}
+        <title>{{title}}</title>
+        {% else %}
+        <title> الذهب اليوم</title>
+        {% endif %}
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+        <!--fontawesome kit-->
+        <script src="https://kit.fontawesome.com/e0ff260592.js" crossorigin="anonymous"></script>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{% static 'goldprice/images/gold-icon.png' %}">
+    
+        <!-- Google Web Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet"> 
+    
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        
+        <!-- Google Web Fonts (cairo)-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300&display=swap" rel="stylesheet">
+
+        <!-- Flaticon Font -->
+        <link href="{% static 'blog/lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
+    
+        <!-- Libraries Stylesheet -->
+        <link href="{% static 'blog/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+        <link href="{% static 'blog/lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+    
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="{% static 'goldprice/css/table.css' %}" rel="stylesheet">
+        <link href="{% static 'blog/css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'goldprice/css/main.css' %}" rel="stylesheet">
+    </head>
+<body>
+   
+    <!-- Topbar Start -->
+    <div class="container-fluid py-3" style="background-color: #174f96">
+        <div class="container mt-2">
+            <div class="row top-nav">
+                <div class="col-md-6 text-center text-lg-right mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                        <div class="d-inline-flex align-items-center top-nav">
+                            <a class="pr-1 log-in" href="{% url 'user:new_item' %}">منتج جديد</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white pr-1" href="{% url 'user:profile' %}">الملف الشخصي</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white pr-1" href="{% url 'user:logout' %}">تسجيل خروج</a>
+                            <!--
+                            <span class="text-white">|</span>
+                            <a class="text-white pr-1" href="">تواصل معنا</a>-->
+                        </div>
+                    {% else %}
+                        <div class="d-inline-flex align-items-center top-nav">
+                            <a class="pr-1 log-in" href="{% url 'user:register' %}">تسجيل الدخول</a>
+                            <span class="text-white">|</span>
+                            <a class="text-white pr-1" href="{% url 'user:login' %}">تسجيل</a>
+                            <!--
+                            <span class="text-white">|</span>
+                            <a class="text-white pr-1" href="">تواصل معنا</a>-->
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 text-center text-lg-left">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0 mb-3">
+        <div class="container position-relative" style="z-index: 9;background-color: #245ea9; color:#fff">
+            <nav class="navbar navbar-light navbar-expand-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="{% url 'goldprice:home' %}" class="navbar-brand">
+                    <h1 class="display-5 text-white"><span class="text-primary">ا</span>لذهب اليوم</h1>
+                </a>
+                <button type="button" class="navbar-toggler text-white" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse" style="background-color: #245ea9;">
+                    <div class="navbar-nav text-right py-0">
+                        <a href="{% url 'news:home' %}" class="nav-item nav-link active" style="color: #d09c00 !important;">الأخبار</a>
+                        <a href="{% url 'user:home' %}" class="nav-item nav-link">متجر الذهب في ألمانيا</a>
+                        <a href="{% url 'goldprice:ounce' %}" class="nav-item nav-link">سعر أونصة الذهب في ألمانيا</a>
+                        <a href="{% url 'goldprice:silver' %}" class="nav-item nav-link">سعر الفضة في ألمانيا</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">أسعار الذهب في دول أخرى</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="{% url 'goldprice:home' %}" class="dropdown-item">سعر الذهب في ألمانيا</a>
+                                <a href="#" class="dropdown-item">سعر الذهب في تركيا</a>
+                                <a href="#" class="dropdown-item">سعر الذهب في كندا</a>
+                                <a href="#" class="dropdown-item">سعر الذهب عالميا بالدولار</a>
+                                <a href="#" class="dropdown-item">سعر الذهب في السعودية</a>
+                            </div>
+                        </div>
+                        <!--<a href="#" class="nav-item nav-link">من نحن</a>-->
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Under Nav Start -->
+    <!--
+    <div class="container-fluid bg-white py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-7 text-left text-lg-center mb-3 mb-lg-0">
+                    <div class="d-inline-flex text-right">
+                        <h1 class="flaticon-email font-weight-normal text-primary m-0 ml-3"></h1>
+                        <div class="d-flex flex-column">
+                            <h5>البريد الالكتروني</h5>
+                            <p class="m-0">akram@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 text-left text-lg-right mb-3 mb-lg-0">
+                    <div class="d-inline-flex text-right">
+                        <h1 class="flaticon-telephone font-weight-normal text-primary m-0 ml-3"></h1>
+                        <div class="d-flex flex-column">
+                            <h5>تواصل معنا</h5>
+                            <p class="m-0 ">509626 0761 49+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- Under Nav End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <div class="container-fluid text-white py-5 px-sm-3 px-md-5" style="background-color: #174f96">
+        <!--<div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Get In Touch</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Location, City, Country</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Quick Links</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
+                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Popular Links</h4>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
+                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-primary mb-4">Newsletter</h4>
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control border-0" placeholder="Your Name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control border-0" placeholder="Your Email" required="required" />
+                    </div>
+                    <div>
+                        <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Submit Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>-->
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                &copy; <a class="text-white font-weight-bold" href="#"> الذهب اليوم</a>. جميع الحقوق محفوظة
+                <a class="text-white font-weight-bold" href="#"> الذهب اليوم دوت كوم 2022</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+    
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg text-white back-to-top" style="display: inline; background-color: #245ea9"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'blog/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'blog/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'blog/lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'blog/lib/lightbox/js/lightbox.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'blog/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'blog/mail/contact.js' %}"></script>
+
+    <!--Font awesome kite -->
+    <script src="https://kit.fontawesome.com/70eaba7a0e.js" crossorigin="anonymous"></script>
+    <!-- Template Javascript -->
+    <script src="{% static 'blog/js/main.js' %}"></script>
+</body>
+
+</html>

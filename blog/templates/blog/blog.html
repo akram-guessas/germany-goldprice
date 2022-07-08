@@ -1,0 +1,72 @@
+{% extends 'goldprice/base.html'%}
+{% load static %}
+
+
+<!-- Blog Start -->
+{% block content %}
+<!-- Page Header Start -->
+<div class="container-fluid py-5 gradient-examples">
+    <div class="container py-5 example linear">
+        <div class="row align-items-center py-4 p-3">
+            <div class="col-md-6 text-center text-md-right">
+                <h3 class="mb-4 mb-md-0 text-white text-uppercase">آخر الأخبار والتدوينات الخاصة بالذهب وأسعار الذهب</h3>
+            </div>
+            <div class="col-md-6 text-center text-md-left">
+                <div class="d-inline-flex align-items-center ">
+                    <a class="btn btn-outline-primary disabled mr-5" href="">الأخبار</a>
+                    <i class="fas fa-angle-double-left text-white mx-2"></i>
+                    <a class="btn btn-outline-primary" href="{% url 'goldprice:home' %}">اسعار الذهب</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header Start -->
+<div class="container-fluid bg-light pt-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col text-center mb-4">
+                <h1 class="mb-3 dygswC" style="color: rgb(42, 43, 47); font-family: 'Droid Arabic Kufi', Arial, Helvetica, sans-serif;">آخر الأخبار</h1>
+                <!--<h2 class="mb-4">أخر الأخبار والتدوينات الخاصة بالذهب وأسعار الذهب</h2>-->
+            </div>
+        </div>
+        <div class="row pb-3">
+            {% for post in posts %}
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 mb-2">
+                        {% if post.post_image %}
+                            <img class="card-img-top" src="{{post.post_image.url}}" alt="">
+                        {% else %}
+                            <img class="card-img-top" src="{% static 'blog/img/defult.jpg' %}" alt="">
+                        {% endif %}
+                        <div class="card-body bg-white p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <a class="btn text-white" href="{% url 'news:detail' post.title post.id %}" style="background-color: #245ea9"><i class="fa fa-link"></i></a>
+                                <h5 class="m-0 mr-3 text-truncate">
+                                    {{post.title|safe}} 
+                                </h5>
+                            </div>
+                            <p class="text-right">
+                                {% if post.content|length > 120 %}
+                                    {{post.content|safe|striptags|slice:120}} ...
+                                    <a href="{% url 'news:detail' post.title post.id  %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9; text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                {% else %}
+                                    {{post.content|safe}} <a href="{% url 'news:detail' post.title post.id %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9; text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                {% endif %}</p>
+                            <div class="d-flex">
+                                <small class=""><i class="fa fa-user text-primary"></i> {{post.author}}</small>
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> أخبار الذهب</small>
+                                <small class="mr-3"><i class="fa fa-clock text-primary"></i> {{post.post_date|date:'d-m-Y'}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% include 'blog/pagination.html' with page=posts %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+<!-- Blog End -->

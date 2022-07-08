@@ -1,0 +1,23 @@
+{% extends 'goldprice/base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="gradient-examples">
+    <div class="border p-4 mb-5 text-right example linear">
+        <legend class="border-bottom pb-1 mb-3">منتج جديد</legend>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+            <div class="text-center">
+                <input class="btn btn-info pr-5 pl-5" type="submit" value="نشر">
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+    .form-control {
+        height: calc(1.75em + 0.75rem + 2px);
+    }
+</style>
+{% endblock content %}

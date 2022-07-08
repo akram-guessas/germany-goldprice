@@ -1,0 +1,17 @@
+{% load static %}
+
+{% for post in l_posts %}
+<div class="d-flex align-items-center border-bottom mb-3 pb-3">
+        {% if post.post_image %}
+            <img class="img-fluid" src="{{post.post_image.url}}" style="width: 80px; height: 80px;" alt="">
+        {% else %}
+            <img class="img-fluid" src="{% static 'blog/img/defult.jpg'%}" style="width: 80px; height: 80px;" alt="">
+        {% endif %}
+        <div class="d-flex flex-column pr-3">
+        <a class="text-dark mb-2" href="">{{post.title}}</a>
+        <div class="d-flex">
+            <small class="mr-2"><i class="fa fa-user text-primary"></i> {{post.author}}</small>
+            <small class="mr-3"><i class="fa fa-comments text-primary"></i> {{post.post_date|date:'d-m-Y'}}</small>
+    </div>
+</div>
+{% endfor %}

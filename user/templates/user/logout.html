@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="gradient-examples">
+    <div class="border p-4 text-center mt-5 example linear" style="margin: auto;margin-bottom:196px; width: 50%;padding: 10px"> 
+        <legend class="border-bottom pb-1 mb-3">لقد تم تسجيل خروجك بنجاح</legend>
+        <a class="btn btn-info" href="{% url 'user:login' %}">تسجيل الدخول مرة أخرى</a>
+    
+    </div>
+</div>
+{% endblock content %}

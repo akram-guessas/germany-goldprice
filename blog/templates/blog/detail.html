@@ -1,0 +1,148 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+{% load post_tag %}
+{% block content %}
+    <!-- Detail Start -->
+    <div class="container py-5 text-right">
+        <div class="row pt-5">
+            <div class="col-lg-8">
+                <div class="d-flex flex-column mb-4">
+                    <h6 class="font-weight-bold mb-3" style="color: #6e6e6e; font-weight: 700">صفحة التفاصيل </h6>
+                    <h1 class="mb-4 section-title">{{post.title}} </h1>
+                    <div class="d-index-flex mb-2"></div>
+                </div>
+
+                <div class="mb-5">
+                    {% if post.post_image %}
+                        <img class="img-fluid w-100 mb-4" src="{{post.post_image.url}}" alt="Image">
+                    {% else %}
+                        <img class="img-fluid w-100 mb-4" src="{% static 'blog/img/defult.jpg' %}" alt="Image">
+                    {% endif %}
+                    <p style="max-width: 100%">{{post.content|safe}}</p>
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="mb-4 mr-3 section-title">اقرأ المزيد </h3>
+                        <div class="row">
+                            {% for p in posts %}
+                                <div class="col-6">
+                                    <div class="card border-0">
+                                        {% if p.post_image%}
+                                            <img class="card-img-top" src="{{p.post_image.url}}" alt="">
+                                        {% else %}
+                                            <img class="card-img-top" src="{% static 'blog/img/defult.jpg'%}" alt="">
+                                        {% endif %}
+                                        <div class="card-body bg-white p-4">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <a class="btn text-white" href="{% url 'news:detail' post.title post.id %}" style="background-color: #245ea9"><i class="fa fa-link"></i></a>
+                                                <h5 class="m-0 mr-3 text-truncate">
+                                                    {{post.title|safe}} 
+                                                </h5>
+                                            </div>
+                                            <p class="text-right">
+                                                {% if post.content|length > 120 %}
+                                                    {{post.content|safe|striptags|slice:120}} ...
+                                                    <a href="{% url 'news:detail' post.title post.id  %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9; text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                                {% else %}
+                                                    {{post.content|safe}} <a href="{% url 'news:detail' post.title post.id %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9; text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                                {% endif %}</p>
+                                            <div class="d-flex">
+                                                <small class=""><i class="fa fa-user text-primary"></i> {{post.author}}</small>
+                                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> أخبار الذهب</small>
+                                                <small class="mr-3"><i class="fa fa-clock text-primary"></i> {{post.post_date|date:'d-m-Y'}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="mb-4 section-title">التعليقات ( {{comments.count}} ) </h3>
+                    {% for comment in comments %}
+                    <div class="media mb-4">
+                        <div class="media-body">
+                            <h6> ({{comment.name}})  <small class="m-2"><i> {{comment.comment_date|date:'M d, Y'}} </i></small></h6>
+                            <p>{{comment.body}}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div align="center">
+                        <div class="gradient-examples">
+                            <div class="example linear">
+                                <h3 class="p-4  border rounded text-white"> لا يوجد تعليق </h6>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor%}
+                   
+                </div>
+
+                <div class="bg-light p-5">
+                    <h3 class="mb-4 section-title">اضافة تعليق جديد</h3>
+                    <!--{% include 'blog/messages.html' %}-->
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">الاسم *</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الالكتروني *</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">عنوان التعليق *</label>
+                            <input type="title" class="form-control" id="title" name="title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">التعليق *</label>
+                            <textarea id="message" name="body" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+                        <p class="text-center">التعليق سينشر بعد المعاينة من طرف ادارة الموقع وشكرا.</p>
+                        <div class="form-group mb-0 text-center">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button  class="btn text-white px-3" type="submit" style="background-color: #245ea9">نشر التعليق</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <!--<div class="mb-5">
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" placeholder="البحث ..">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-transparent text-info"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>-->
+                <div class="">
+                    <!-- adsense code -->
+                </div>
+                <div class="mb-5">
+                    <h3 class="mb-4 section-title">أخر الأخبار</h3>
+                    {% latest_posts %}
+                </div>
+    
+                <div class="mb-5">
+                    <!-- adsense code  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Detail End -->
+    <script>
+        setTimeout(function(){
+          if ($('#msg').length > 0) {
+            $('#msg').remove();
+          }
+        }, 2000)
+    </script>
+{% endblock %}

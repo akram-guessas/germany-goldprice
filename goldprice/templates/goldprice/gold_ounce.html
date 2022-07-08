@@ -1,0 +1,324 @@
+{% extends 'goldprice/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container border rounded border-white shadow-lg p-3 mb-5 bg-body rounded text-center gradient-examples" style="max-width: 960px; background-color:#fff">
+    <!-- header image -->
+    <div class="container">
+        <!--
+        <img class="img-fluid border-bottom border-top border-primary" src="{% static 'goldprice/images/header.png' %}" alt="">
+        -->
+    </div>
+    <!--end header image -->
+        <!-- intro -->
+    <div class="gradient-examples">
+    <div class="container border rounded border-primary example linear" id="intro">
+        <div class="border rounded border-primary text-right mt-3 mb-3 p-3">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <h2 style="text-shadow: 2px 1px 2px #ff8a00"> 
+                        <img class="img-fluid" src="{% static 'goldprice/images/gold-icon.png'%}" width="32" alt="">
+                        نظرة على اسعار الذهب اليوم في ألمانيا
+                    </h2>
+                    <div class="mt-3 mb-3" style="border-bottom: 2px solid #FFCC33;"></div>
+                    <p class="mb-3">
+                        اسعار الذهب اليوم ..اسعار الذهب اليوم هي خدمة مجانية تحرص منصتنا على تقديمها للزائرين ليكونوا مطلعين باستمرار ولحظيا على سعر الذهب اليوم في ألمانيا .. 
+                        اسعار الذهب اليوم ..اسعار الذهب اليوم هي خدمة مجانية تحرص منصتنا على تقديمها للزائرين ليكونوا مطلعين باستمرار ولحظيا على سعر الذهب اليوم في ألمانيا ..
+                        
+                    </p>
+                    <h5>
+                        <a class="text-white" href="" style="font-size: 12px;" title="الصفحة الرئيسية لموقع الذهب اليوم">{{title}} » 
+                            أخر تحديث لاسعار الذهب والفضة اليوم : <span style="color: black;font-weight: bold;">{{date}}</span></a>
+                    </h5>
+                </div>
+                <div class="col-md-4 col-sm-12 text-center">
+                    <img class="img-responsive rounded" id="logo-ban" src="{% static 'goldprice/images/germany_flag.jpeg'%}" alt="">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <!-- end intro -->
+    <div class="border rounded example linear " id="gram_h3">
+        <img class="responsive-img mb-2" width="171" height="100" src="{% static 'goldprice/images/gram.png'%}" alt="">
+        <h3>  سعر 1 أونصة من الذهب = {{ounce}} <span style="font-size: 12px; color: #FFCC33">EUR</span> </h3>
+    </div>
+    <br>
+    <section class="group1">
+        <div class="group-title text-right">
+            <h3>
+                <img class="img-fluid" src="{% static 'goldprice/images/gold-icon.png'%}" width="32" alt="">
+            سعر أونصة الذهب في ألمانيا باليورو 
+            <span class="dollar-euro">(£)</span> والدولار 
+            <span class="dollar-euro">($)</span> 
+            </h3>
+        </div>
+        <br>
+        
+        <div class="table-responsive" style="max-width: 100%; text-align: center;">
+            <table class="table table-striped table-hover">
+                <thead class="bg-white border-light text-dark">
+                    <tr>
+                        <td colspan="6" style="font-weight: bold;text-align: right;"> <img class="ml-2 rounded" width="35" height="20" src="{% static 'goldprice/images/germany_flag.jpeg'%}" alt=""> سعر أونصة الذهب اليوم باليورو <i class="fa-solid fa-euro-sign"></i>  <i class="fa-solid fa-angles-left" style="color: #52b55f;"></i></td>
+                    </tr>
+                    <tr style="font-size: 13px; color: #52b55f" >
+                        <th scope="col">الوحدة</th>
+                        <th scope="col"> السعر <i class="fa-solid fa-euro-sign" style="color: #333"></i></th>
+                        <th scope="col"> الشراء </th>
+                        <th scope="col"> البيع</th>
+                        <th scope="col"> الفرق </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if data_eur_ounce %}
+                    {% for data in data_eur_ounce %}
+                        <tr>
+                            <td class="text-dark" style="font-weight: bold;">{{data.karat}}</td>
+                            <td class="text-dark" style="font-style: normal;"><strong>{{data.ounce}} <i class="fa-solid fa-euro-sign" style="color: #333"></i></strong></td>
+                            <td>{{data.high}} <i class="fa-solid fa-euro-sign" style="color: #333"></i></td>
+                            <td>{{data.low}} <i class="fa-solid fa-euro-sign" style="color: #333"></i></td>
+                            
+                            {% if data.color %}
+                                <td style="font-weight: bold; color: #52b55f; font: 50%;">
+                                    <div class="row">
+                                        <div class="col"><span style="font-size: 11px;">{{data.change}}</span></div>
+                                        <!-- <i class="fa-solid fa-arrow-up" style=""></i> -->
+                                        <div class="col"><img src="{% static 'goldprice/images/arrow-up.svg'%}" alt=""></div>
+                                    </div> 
+                                </td>
+                            {% else %}
+                                <td style="font-weight: bold; color: #e6504d; font: 50%;">
+                                    <div class="row">
+                                        <div class="col"><span style="font-size: 11px;">{{data.change}}</span></div>
+                                        <div class="col">
+                                            <!-- <i class="fa-solid fa-arrow-down" style="color: #e6504d;"></i> -->
+                                            <img src="{% static 'goldprice/images/arrow-down.svg'%}" alt=""></div>
+                                    </div> 
+                                </td>                                               
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
+                    <tr>
+                    <td colspan="6"> <div class="mt-1 mb-1" id="time">
+                        <i class="fa fa-calendar-o"></i> <span>أخر تحديث بتاريخ : </span> {{date}}
+                        <i class="fa fa-clock-o"></i> <span>الوقت :</span> {{time}}.
+                    </div> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>  
+        
+        <div class="table-responsive" style="max-width: 100%; text-align: center;">
+            <table class="table table-striped table-hover">
+                <thead class="bg-white border-light text-dark">
+                    <tr>
+                        <td colspan="6" style="font-weight: bold;text-align: right;"> <img class="ml-2 rounder" width="35" height="20" src="{% static 'goldprice/images/germany_flag.jpeg'%}" alt=""> سعر أونصة الذهب اليوم بالدولار <i class="fa-solid fa-dollar-sign"></i>  <i class="fa-solid fa-angles-left" style="color: #52b55f;"></i></td>
+                    </tr>
+                    <tr style="font-size: 13px; color: #52b55f" >
+                        <th scope="col">الوحدة</th>
+                        <th scope="col"> السعر <i class="fa-solid fa-dollar" style="color: #333"></i></th>
+                        <th scope="col"> الشراء </th>
+                        <th scope="col"> البيع</th>
+                        <th scope="col"> الفرق </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if data_usd_ounce %}
+                    {% for data in data_usd_ounce %}
+                        <tr>
+                            <td class="text-dark" style="font-weight: bold;">{{data.karat}}</td>
+                            <td class="text-dark"><strong>{{data.ounce}} <i class="fa-solid fa-dollar" style="color: #333"></i></strong></td>
+                            <td>{{data.high}} <i class="fa-solid fa-dollar" style="color: #333"></i></td>
+                            <td>{{data.low}} <i class="fa-solid fa-dollar" style="color: #333"></i></td>
+                            {% if data.color %}
+                                <td style="font-weight: bold; color: #52b55f; font: 50%;">
+                                    <div class="row">
+                                        <div class="col"><span style="font-size: 11px;color: #52b55f;">{{data.change}}</span></div>
+                                        <!-- <i class="fa-solid fa-arrow-up" style="color: #52b55f;"></i> -->
+                                        <div class="col"><img src="{% static 'goldprice/images/arrow-up.svg'%}" alt=""></div>
+                                    </div> 
+                                </td>
+                            {% else %}
+                                <td style="font-weight: bold; color: #e6504d; font: 50%;">
+                                    <div class="row">
+                                        <div class="col"><span style="font-size: 11px;color: #e6504d;">{{data.change}}</span></div>
+                                        <div class="col">
+                                            <!-- <i class="fa-solid fa-arrow-down" style="color: #e6504d;"></i> -->
+                                            <img src="{% static 'goldprice/images/arrow-down.svg'%}" alt=""></div>
+                                    </div> 
+                                </td>                                               
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
+
+                    <tr>
+                    <td colspan="6"> <div class="mt-1 mb-1" id="time">
+                        <i class="fa fa-calendar-o"></i> <span>أخر تحديث بتاريخ : </span> {{date}}
+                        <i class="fa fa-clock-o"></i> <span>الوقت :</span> {{time}}
+                    </div> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <hr>
+        <div class="containe">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="group-title text-right">
+                        <h3 style="font-size: 18px !important">
+                            <img class="img-fluid" src="{% static 'goldprice/images/gold-icon.png'%}" width="32" alt="">
+                            سعر أونصة الذهب في الايام السابقة
+                        </h3>
+                        <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary" >يعرض هذا المنحنى اسعار الذهب في المانيا عيار 24 قيراط خلال 7 أيام الماضية. أيضا تستطيع حفظ المنحنى سعر الذهب باليورو إلى جهازك كصورة وذلك بالضغط على رمز الصورة من المنحنى البياني بشكل مباشر ...</p>
+
+                    </div>
+
+                    <div class="table-responsive" style="max-width: 100%; text-align: center;">
+                        <table class="table table-striped table-hover">
+                            <thead class="bg-white border-light text-dark">
+                                <tr>
+                                    <td class="text-right" colspan="6" style="font-weight: bold;"> <img class="ml-2 rounded" width="35" height="20" src="{% static 'goldprice/images/germany_flag.jpeg'%}" alt="">  سعر أونصة الذهب في الايام السابقة <i class="fa-solid fa-euro-sign"></i>  <i class="fa-solid fa-angles-left" style="color: #52b55f;"></i></td>
+                                </tr>
+                                <tr style="font-size: 13px; color: #52b55f" >
+                                    <th scope="col">التاريخ</th>
+                                    <th scope="col"> السعر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if history_of_ounce %}
+                                {% for data in history_of_ounce %}
+                                    <tr>
+                                        <td class="text-dark" style="font-weight: bold; padding: 0.02rem !important">{{data.date}}</td>
+                                        <td class="" style="font-style: normal; padding: 0.02rem !important"><strong>{{data.price}} <i class="fa-solid fa-euro-sign" style="color: #333"></i></strong></td>
+                                    </tr>
+                                {% endfor %}
+                                {% endif %}
+                                <tr>
+                                <td colspan="6"> <div class="mt-1 mb-1" id="time">
+                                    <i class="fa fa-calendar-o"></i> <span>أخر تحديث بتاريخ : </span> {{date}}
+                                    <i class="fa fa-clock-o"></i> <span>الوقت :</span> {{time}}.
+                                </div> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="group-title text-right">
+                        <h3 style="font-size: 18px !important">
+                            <img class="img-fluid" src="{% static 'goldprice/images/gold-icon.png'%}" width="32" alt="">
+                            مخطط سعر أونصة الذهب في ألمانيا خلال الايام 15 الماضية
+                        </h3>
+                        <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary" >يعرض هذا المنحنى اسعار الذهب في المانيا عيار 24 قيراط خلال 6 أشهر الماضية. أيضا تستطيع حفظ المنحنى سعر الذهب باليورو إلى جهازك كصورة وذلك بالضغط على رمز الصورة من المنحنى البياني بشكل مباشر ...</p>
+                    
+                        <div class="chart text-center mb-4">
+                            {% include 'goldprice/chart_ounce_15days.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="text-right group-title">
+                <h4>
+                    <img class="img-fluid" src="{% static 'goldprice/images/gold-icon.png'%}" width="42" alt="">
+                    عن سعر أونصة الذهب في ألمانيا
+                </h4>
+            </div>
+            <div class="text-right shadow-lg p-2 pr-3 text-dark border border-primary mb-3">
+                
+                    موقع اسعار الذهب في المانيا يقدم تحليل يومي عن أسعار الذهب اليوم في الإتحاد الأوروبي باليورو (EUR) بيع وشراء ، واليورو هو العملة الموحدة في دول الإتحاد الأوروبي ورمزه ERO. كما يحتوي التقرير على سعر جرام الذهب في ألمانيا بالعيارات
+                    المختلفة عيار 24، 22، 21، 18 ،14، 10 و عيار 6 وبجميع الأوزان بالدولار الأمريكي. يتم تحديث أسعار
+                    الذهب في ألمانيا تقريبا مرة كل 15 دقيقة من مؤشر بورصة الذهب العالمية.
+            <br>
+            <br>
+            <h4> كم سعر أونصة الذهب في ألمانيا اليوم {{date}} </h4>
+            
+            <ul class="list-group list-group-flush p-0">
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب في ألمانيا بيع وشراء اليوم عيار 24 قيراط : <strong class="text-info" style="text-shadow: 1px 1px 2px #FFCC33">{{ounce}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب اليوم في المانيا عيار 22 قيراط : <strong>{{karat_22}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر جرام الذهب 21 في أوروبا : <strong>{{karat_21}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب في المانيا اليوم عيار 18 قيراط : <strong>{{karat_18}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب في المانيا اليوم عيار 14 قيراط : <strong>{{karat_14}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب في المانيا اليوم عيار 10 قيراط : <strong>{{karat_10}}</strong> يورو.</li>
+                <li class="list-group-item"><i class="fas fa-chevron-circle-left text-info ml-1"></i> سعر الذهب في المانيا اليوم عيار 6 قيراط : <strong>{{karat_6}}</strong> يورو.</li>
+
+            </ul>
+        
+            </div>
+        </div>
+
+        <div class="text-right">
+            <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary">
+                الفقرة 1 خاصة بال seo 
+            </p>
+            <br>
+            <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary">
+                الفقرة 2 خاصة بال seo 
+            </p>
+            <br>
+            <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary">
+                الفقرة 3 خاصة بال seo 
+            </p>
+            <br>
+            <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary">
+                الفقرة 4 خاصة بال seo 
+            </p>
+            <p class="shadow-lg p-2 pr-3 text-dark border-bottom border-primary">
+                الفقرة 5 خاصة بال seo 
+            </p>
+        </div>
+    </section>
+    <section class="group4 text-right mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col text-center mb-4">
+                <h1 class="mb-3 dygswC" style="color: rgb(42, 43, 47); font-family: 'Droid Arabic Kufi', Arial, Helvetica, sans-serif;">آخر الأخبار</h1>
+                <!--<h2 class="mb-4">أخر الأخبار والتدوينات الخاصة بالذهب وأسعار الذهب</h2>-->
+            </div>
+        </div>
+        <div class="row pb-3">
+            {% for post in posts %}
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 mb-2">
+                        {% if post.post_image %}
+                            <img class="card-img-top" src="{{post.post_image.url}}" alt="">
+                        {% else %}
+                            <img class="card-img-top" src="{% static 'blog/img/defult.jpg' %}" alt="">
+                        {% endif %}
+                        <div class="card-body bg-white p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <a class="btn text-white" href="{% url 'news:detail' post.title post.id %}" style="background-color: #245ea9"><i class="fa fa-link"></i></a>
+                                <h5 class="m-0 mr-3 text-truncate">
+                                    {{post.title|safe}} 
+                                </h5>
+                            </div>
+                            <p class="text-right">
+                                {% if post.content|length > 120 %}
+                                    {{post.content|safe|striptags|slice:120}} ... <br>
+                                    <a href="{% url 'news:detail' post.title post.id  %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9;text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                {% else %}
+                                    {{post.content|safe}} <br> <a href="{% url 'news:detail' post.title post.id %}" style="text-shadow: 1px 2px 3px #cc902a;color:#245ea9;text-shadow: 1px 2px 3px #cc902a;color:#245ea9;padding: 0.25rem;">اقرأ المزيد </a>
+                                {% endif %}</p>
+                            <div class="d-flex">
+                                <small class=""><i class="fa fa-user text-primary"></i> {{post.author}}</small>
+                                <small class="mr-1"><i class="fa fa-folder text-primary"></i> أخبار الذهب</small>
+                                <br>
+                                <small class="mr-1"><i class="fa fa-clock text-primary"></i> {{post.post_date|date:'d-m-Y'}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </section>
+   
+</div>
+
+{% endblock %}

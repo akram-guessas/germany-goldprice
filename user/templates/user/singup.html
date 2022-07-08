@@ -1,0 +1,27 @@
+{% extends 'goldprice/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="gradient-examples" style="min-height:350px">
+    <div class="p-4 mb-5 text-right example linear" >
+        <div class="p-4 text-center" style="max-width: 500px;margin: auto; width: 100%;padding: 10px;">
+                <h1 style='font-size: 24px;font-weight: bold;color:#ffffff'>يمكنك تسجيل الدخول كمستخدم أو كبائع</h1>
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+                        <div class="col p-3">
+                          <p style="color: #DFB163;">يمكنك التسجيل كبائع فقط بالنقر على الزر أدناه</p>
+                          <a href="{% url 'user:vendor_signup' %}"><button type="button" class="btn btn-primary btn-lg ">سجل كبائع</button></a>
+                        </div>
+                        <div class="col p-3">
+                            <p style="color: #DFB163;">يمكنك التسجيل كمستخدم فقط بالنقر على الزر أدناه</p>
+                            <a href="{% url 'user:customer_signup' %}"><button type="button" class="btn btn-info btn-lg">سجل كمستخدم</button></a>
+                        </div>
+                      
+                    </div>
+                  </div>
+                
+                
+            </div>
+    </div>
+</div>
+{% endblock content %}

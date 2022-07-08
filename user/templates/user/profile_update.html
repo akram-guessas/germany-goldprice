@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="gradient-examples border bg-light" style="max-width: 900px">
+    <div class="border p-4 mb-5 text-right example linear">
+        <div class="border p-4" style="max-width: 800px;margin: auto; width: 100%;padding: 10px">
+            <legend class="border-bottom pb-1 mb-3 text-center">تعديل الملف الشخصي</legend>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{user_form|crispy}}
+                <!-- {{profile_form|crispy}} -->
+                <span class="mb-2" style="display: block">صورة الملف الشخصي *</span>
+                <div class="row">
+                    
+                    <div class="col-md-12 text-center">
+                        <img alt="{{user.username}}" class="img-fluid rounded-circle border mt-4" src="{{user.profile.image.url}}" style="width: 80px; height:80px;">
+                        <h4 class="mt-2 text-white">الصورة الحالية</h4>
+                        <label for="image" class="btn btn-info mt-2">تحميل صورة جديدة</label>
+                        
+                        <input type="file" name="image" id="image" accept="image/*" style="display: none;">
+            
+                    </div>
+                   
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-info mt-4 pr-5 pl-5" type="submit" value="تعديل">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

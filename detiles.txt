@@ -1,0 +1,4 @@
+colors: 
+1- nav && Footer: (174f96, 245ea9)
+2- text: (black, white, green)
+3- background-image: color()
