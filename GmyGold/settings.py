@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'crispy_forms',
+    'bootstrap5',
     'import_export',
     'django_filters',
     'django_cleanup.apps.CleanupConfig',
@@ -69,7 +70,8 @@ ROOT_URLCONF = 'GmyGold.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')),],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,5 +160,5 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 

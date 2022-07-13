@@ -8,7 +8,7 @@ from .views import ItemCreateView, ItemUpdateView, ItemDeleteView,CustomerSignUp
 # from .views import SingUp,CustomerSignUpView,VendorSignUpView
 
 urlpatterns = [
-    path(r'^list$', views.index, name='home'),
+    path('store', views.index, name='home'),
     path('new_item/', ItemCreateView.as_view(), name='new_item'),
     path('new_item/detail/<str:item_name>/<int:item_id>',views.Item_detail,name='detail'),
     path('new_item/detail/<slug:pk>/update/', ItemUpdateView.as_view(), name='item-update'),

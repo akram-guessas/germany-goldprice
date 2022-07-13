@@ -569,24 +569,24 @@ def gold_price_charts_data():
         data.append({'date': date,"price":price})
 
     df_30 = pd.DataFrame(data_list(data, data_30, 30))
-    make_chart(df_30,"date","price"," مخطط سعر الذهب خلال 30 أيام الماضية","./goldprice/templates/goldprice/chart_30.html" ,marker=True)
+    make_chart(df_30,"date","price"," مخطط سعر الذهب خلال 30 أيام الماضية","./templates/goldprice/chart_30.html" ,marker=True)
    
     list_month, historic_data, df_7_days = get_listOf_sixmonth()
     df_six_month = pd.DataFrame(list_month)
-    make_chart(df_7_days,"date","price","مخطط سعر الذهب خلال 7 أيام الماضية","./goldprice/templates/goldprice/chart_7_days.html", marker=True)
+    make_chart(df_7_days,"date","price","مخطط سعر الذهب خلال 7 أيام الماضية","./templates/goldprice/chart_7_days.html", marker=True)
     
-    make_chart(df_six_month,"الاشهر","أعلى سعر","مخطط سعر الذهب خلال 6 أشهر الماضية","./goldprice/templates/goldprice/chart_six_month.html", marker=True)
+    make_chart(df_six_month,"الاشهر","أعلى سعر","مخطط سعر الذهب خلال 6 أشهر الماضية","./templates/goldprice/chart_six_month.html", marker=True)
     
     list_oneyear = get_listOf_oneyear()
     df_oneyear = pd.DataFrame(list_oneyear)
-    make_chart(df_oneyear,"الاشهر","أعلى سعر","مخطط سعر الذهب خلال السنة الماضية","./goldprice/templates/goldprice/chart_oneyear.html", marker=True)
+    make_chart(df_oneyear,"الاشهر","أعلى سعر","مخطط سعر الذهب خلال السنة الماضية","./templates/goldprice/chart_oneyear.html", marker=True)
     
     # ounce chart for 15 days 
     df_oneyear = pd.read_csv("./static/goldprice/csv/history_of_ounce.csv")
-    make_chart(df_oneyear,"date","price","سعر أونصة الذهب في الايام السابقة","./goldprice/templates/goldprice/chart_ounce_15days.html", marker=True)
+    make_chart(df_oneyear,"date","price","سعر أونصة الذهب في الايام السابقة","./templates/goldprice/chart_ounce_15days.html", marker=True)
     
     df = pd.read_csv('./static/goldprice/csv/silver_chart_data.csv')
-    make_chart(df,"date","gram","سعر غرام الفضة في الايام 90 السابقة","./goldprice/templates/goldprice/chart_silver_gram.html", marker=True)
+    make_chart(df,"date","gram","سعر غرام الفضة في الايام 90 السابقة","./templates/goldprice/chart_silver_gram.html", marker=True)
 
     
 # Historical Silver Price Chart in EUR
@@ -614,8 +614,8 @@ def silver_chart_data():
             pass
     df = pd.DataFrame(list)
     df.head(7).to_csv('./static/goldprice/csv/silver_chart_data.csv', index=False)
-    make_chart(df.head(7),"date","gram","سعر غرام الفضة في الايام 7 السابقة","./goldprice/templates/goldprice/chart_silvergrm_7days.html", marker=True)
-    make_chart(df.head(7),"date","ounce","سعر أونصة الفضة في الايام 7 السابقة","./goldprice/templates/goldprice/chart_silverounce_7days.html", marker=True)
+    make_chart(df.head(7),"date","gram","سعر غرام الفضة في الايام 7 السابقة","./templates/goldprice/chart_silvergrm_7days.html", marker=True)
+    make_chart(df.head(7),"date","ounce","سعر أونصة الفضة في الايام 7 السابقة","./templates/goldprice/chart_silverounce_7days.html", marker=True)
 
 
 def chart_data_ounce():

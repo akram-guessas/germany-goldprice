@@ -6,6 +6,6 @@ class GoldpriceConfig(AppConfig):
     name = 'goldprice'
     
     def ready(self):
-        print("Starting Scheduler ...")
+        # print("Starting Scheduler ...")
         from .goldprice_schedule import goldprice_updator
         goldprice_updator.start()
