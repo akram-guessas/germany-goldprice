@@ -1,1 +1,1 @@
-APScheduler deep-translator requests bs4 pandas plotly Pillow django Djangojango-ckeditor django-cleanup django-js-asset django-taggit django-crispy-forms gunicorn whitenoise django-filterdjango-import-export django-adminlte3 django bootstrap-v51
+pip install --only-binary=:all: APScheduler deep-translator requests bs4 pandas plotly Pillow django django-ckeditor django-cleanup django-js-asset django-taggit django-crispy-forms gunicorn whitenoise django-filter django-import-export django-adminlte3 django django-bootstrap5
